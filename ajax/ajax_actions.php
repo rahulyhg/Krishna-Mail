@@ -4,6 +4,9 @@ $action = $_POST['action'];
 
 $connection = new mysqli("localhost", "root", "MBPLl5tHR0");
 
+if (!$connection->set_charset("utf8mb4")) {
+	exit();
+}
 
 // Check connection
 if ($connection->connect_error) {
@@ -66,7 +69,6 @@ if ( $action == 'reset') {
 	echo json_encode(['status' => $result]);
 }
 
-
 if ( $action == 'get_last_send_id') {
 	$sql = "SELECT * FROM mail.mails WHERE send=0 LIMIT 1";
 	$result = mysqli_query($connection, $sql);
@@ -80,6 +82,77 @@ if ( $action == 'get_last_send_id') {
 	} else {
 		echo json_encode(['id' => -1, 'status' => true]);
 	}
+}
+
+if ( $action == 'message_save') {
+	$subject = $_POST['subject'];
+	$message = $_POST['message'];
+
+	$sql = "UPDATE mail.messages SET subject='".$subject."', message='".$message."' WHERE id=1";
+	$result = mysqli_query($connection, $sql);
+
+	echo json_encode(['status' => $result]);
+}
+
+if ( $action == 'new_contact_save') {
+	$contact_name = $_POST['contact_name'];
+	$contact_phone = $_POST['contact_phone'];
+	$contact_email = $_POST['contact_email'];
+
+	$sql = "SELECT * FROM mail.mails WHERE mail='".$contact_email."'";
+	$result = mysqli_query($connection, $sql);
+	if ( $result->num_rows > 0 ) {
+		echo json_encode(['status' => 0, 'error' => 'Email already exist']);
+	} else {
+		$sql = "INSERT INTO `mail`.`mails` (`name`, `phone`, `mail`) VALUES ('$contact_name', '$contact_phone', '$contact_email')";
+		$result = mysqli_query($connection, $sql);
+		echo json_encode(['status' => $result]);
+	}
+}
+
+if ( $action == 'get_table_data') {
+	$sql = "SELECT * FROM mail.mails";
+	$result = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		$html_response = '<tr><td align=\'center\'><input type=\'checkbox\'></td><td align=\'center\'>ID</td><td>Name</td><td>Phone</td><td>Email</td><td align=\'center\'>St</td></tr>';
+		while($row = mysqli_fetch_assoc($result)) {
+			$status = ( $row['send'] == 1 ) ? 'active': '';
+			$html_response .= "<tr class='im-mail-item-".$row['id']."'>";
+			$html_response .= "<td width='20'><input type='checkbox'></td>";
+			$html_response .= "<td width='20' align='center'>".$row['id']."</td>";
+			$html_response .= "<td>".$row['name']."</td>";
+			$html_response .= "<td>".$row['phone']."</td>";
+			$html_response .= "<td class='im-email'>".$row['mail']."</td>";
+			$html_response .= "<td align='center' width='20'><div class='im-status ".$status."'></div></td>";
+			$html_response .= "</tr>";
+		}
+	}
+
+	echo json_encode(['status' => true, 'html' => $html_response]);
+}
+
+
+if ( $action == 'get_config_data' ) {
+	$sql = "SELECT * FROM mail.params";
+	$result = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_assoc($result)) {
+			$params_data[] = $row;
+		}
+	}
+
+	$sql = "SELECT * FROM mail.messages";
+	$result = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_assoc($result)) {
+			$messages_data[] = $row;
+		}
+	}
+
+	echo json_encode(['params_data' => $params_data, 'messages_data' => $messages_data, 'status' => true]);
 }
 
 //mysqli_close($connection);
