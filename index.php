@@ -1,47 +1,16 @@
-<?php
-// Create connection
-$connection = new mysqli("localhost", "root", "MBPLl5tHR0");
-
-// Check connection
-if ($connection->connect_error) {
-	die("Connection failed: " . $connection->connect_error);
-}
-
-$sql = "SELECT * FROM mail.mails";
-$result = mysqli_query($connection, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-	while($row = mysqli_fetch_assoc($result)) {
-		$emails[] = $row;
-	}
-}
-
-
-$sql = "SELECT * FROM mail.params";
-$result = mysqli_query($connection, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-	// output data of each row
-	while($row = mysqli_fetch_assoc($result)) {
-		$params[] = $row;
-	}
-}
-
-//mysqli_close($connection);
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Mail sender</title>
+	
+	<!-- LESS -->
 	<link rel="stylesheet/less" type="text/css" href="../css/styles.less" />
 
+	<!-- JS -->
 	<script src="../js/jquery-3.1.1.min.js" type="text/javascript"></script>
 	<script src="../js/jquery-ui.min.js"></script>
 	<script src="../js/less.min.js" type="text/javascript"></script>
 	<script src="../js/kernel.js" type="text/javascript"></script>
-	
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 </head>
 
@@ -55,10 +24,10 @@ if (mysqli_num_rows($result) > 0) {
 
 		<div class="im-control-container">
 			<div class="im-control">
-				<button class="im-button im-add-button add im-left">Add Mail</button>
-				<button class="im-button im-config-button add im-right">Config</button>
-				<button class="im-button im-reset-button im-right">Reset</button>
-				<button class="im-button im-send-button active im-right">Send</button>
+				<button class="im-button im-add-button green im-left">Add Mail</button>
+				<button class="im-button im-config-button blue im-left">Config</button>
+				<button class="im-button im-reset-button red im-right">Reset</button>
+				<button class="im-button im-send-button green im-right">Send</button>
 			</div>
 		</div>
 		<div class="im-email-tc">
@@ -70,22 +39,33 @@ if (mysqli_num_rows($result) > 0) {
 	
 	<div class='im-window im-config-window'>
 		<div class="im-window-title">Configuration</div>
-		<div class="tab_item" style="">
-			<input class="im-input im-input-interval" type="text" value="<?=$params[0]['val']; ?>">
-			<input class="im-input im-input-mail" type="text" value="<?=$params[1]['val']; ?>">
-			<input class="im-input im-input-pass" type="password" value="<?=$params[2]['val']; ?>">
+
+		<ul class="im-ul-tab">
+			<li tab-name='' class="im-li-tab-item active">Account</li>
+			<li class="im-li-tab-item">Message</li>
+			<li class="im-li-tab-item">Test Emails</li>
+		</ul>
+		<div class="clear"></div>
+		<div class="im-tab-container">
+			<div class="tab-item">
+				<input class="im-input im-input-interval" type="text" value="<?=$params[0]['val']; ?>">
+				<input class="im-input im-input-mail" type="text" value="<?=$params[1]['val']; ?>">
+				<input class="im-input im-input-pass" type="password" value="<?=$params[2]['val']; ?>">
+			</div>
+
+			<div class="tab-item active">
+				<input type="text" class="im-input im-subject" placeholder="Subject">
+				<textarea class="im-message-textarea"></textarea>
+			</div>
 		</div>
 
-		<div class="im-hr"></div>
 
-		<div class="tab_item">
-			<input type="text" class="im-input im-subject" placeholder="Subject">
-			<textarea class="im-message-textarea"></textarea>
-		</div>
+<!--		<div class="im-hr"></div>-->
+
 
 		<div class="im-control">
-			<button class="im-button im-close-button stop im-right">Close</button>
-			<button class="im-button im-message-save-button active im-left">Save</button>
+			<button class="im-button im-close-button red im-right">Close</button>
+			<button class="im-button im-message-save-button green im-left">Save</button>
 		</div>
 	</div>
 
@@ -109,11 +89,10 @@ if (mysqli_num_rows($result) > 0) {
 			</tr>
 		</table>
 		<div class="im-control">
-			<button class="im-button im-close-button stop im-right">Close</button>
-			<button class="im-button im-add-new-contact-save-button active im-left">Save</button>
+			<button class="im-button im-close-button yellow im-right">Close</button>
+			<button class="im-button im-add-new-contact-save-button yellow im-left">Save</button>
 		</div>
 	</div>
-
 
 	<div class='im-window im-message-window'>
 		<div class="im-window-title">Message</div>

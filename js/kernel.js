@@ -2,6 +2,7 @@ var mail = '', pass = '', sending = false, interval = 5;
 var current_email = '';
 var last_id = -1;
 var process_window_name = '';
+
 $( document ).ready(function() {
 	tinymce.init({
 		selector: 'textarea',
@@ -16,8 +17,17 @@ $( document ).ready(function() {
 		content_css: '//www.tinymce.com/css/codepen.min.css'
 	});
 
+
+	$('.im-ul-tab .im-li-tab-item').click( function() {
+		$('.im-ul-tab .im-li-tab-item').removeClass('active');
+		$(this).addClass('active');
+	});
+
+
 	get_last_id(false);
 	get_table_data();
+
+
 
 	$('.im-add-button').click(function () {
 		close_all_window();
