@@ -2,11 +2,12 @@ var mail = '', pass = '', sending = false, interval = 5;
 var current_email = '';
 var last_id = -1;
 var process_window_name = '';
+var tab_name = "tab-name-config";
 
 $( document ).ready(function() {
 	tinymce.init({
 		selector: 'textarea',
-		height: 250,
+		height: 230,
 		menubar: true,
 		plugins: [
 			'advlist autolink lists link image charmap print preview anchor',
@@ -21,13 +22,14 @@ $( document ).ready(function() {
 	$('.im-ul-tab .im-li-tab-item').click( function() {
 		$('.im-ul-tab .im-li-tab-item').removeClass('active');
 		$(this).addClass('active');
+		tab_name = $(this).attr('tab-name');
+		$('.im-tab-container .tab-item').removeClass('active');
+		$('.'+tab_name).addClass('active');
 	});
 
 
 	get_last_id(false);
 	get_table_data();
-
-
 
 	$('.im-add-button').click(function () {
 		close_all_window();
@@ -92,21 +94,48 @@ $( document ).ready(function() {
 		$('.im-config-window').addClass('active');
 	});
 
-	$('.im-message-save-button').click(function () {
-		var subject =  $('.im-config-window .im-subject').val();
-		var content = tinyMCE.activeEditor.getContent({format : 'raw'});
+	$('.im-config-window .im-save-button').click(function () {
+		if (tab_name == 'tab-name-config') {
+		
+		} else if (tab_name == 'tab-name-message') {
+			var subject =  $('.im-config-window .im-subject').val();
+			var content = tinyMCE.activeEditor.getContent({format : 'raw'});
 
-		$.ajax({
-			type: 'POST',
-			url: 'ajax/ajax_actions.php',
-			data: { action: 'message_save', subject: subject, message: content },
-			success: function(data){
-				data = JSON.parse(data);
-				if ( data.status == true ) {
-					$('.im-config-window').removeClass('active');
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/ajax_actions.php',
+				data: { action: 'message_save', subject: subject, message: content },
+				success: function(data){
+					data = JSON.parse(data);
+					if ( data.status == true ) {
+						message('Email message saved successfully');
+					}
 				}
-			}
-		});
+			});
+		} else if (tab_name == 'tab-name-test-emails') {
+			var test_emails = [];
+			$('.tab-name-test-emails .im-test-email').each(function(index, el) {
+				if ( $(el).val() != '' ) {
+					test_emails.push($(el).val());
+				} else {
+					test_emails.push('');
+				}
+			});
+			
+			test_emails = JSON.stringify(test_emails)
+			
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/ajax_actions.php',
+				data: { action: 'test_emails_save', test_emails: test_emails},
+				success: function(data){
+					data = JSON.parse(data);
+					if ( data.status == true ) {
+						message("Test Emails saved successfully");
+					}
+				}
+			});
+		}
 	});
 
 	$('.im-add-new-contact-save-button').click(function () {
@@ -135,6 +164,7 @@ $( document ).ready(function() {
 	});
 
 	$('.im-window .im-close-button').click(function () {
+		console.log('close');
 		$(this).closest('.im-window').removeClass('active');
 	});
 
@@ -224,20 +254,19 @@ function get_config_data() {
 		data: { action: 'get_config_data'},
 		success: function(data){
 			data = JSON.parse(data);
-			console.log(data);
-
-			$.each(data.params_data, function (index, value) {
-				if (value.param_name == 'interval') {
+			$.each(data.options_data, function (index, value) {
+				if (value.param_name == 'send_interval') {
 					$('.im-config-window .im-input-interval').val( value.val );
-				} else if (value.param_name == 'gmail') {
+				} else if (value.param_name == 'gmail_account') {
 					$('.im-config-window .im-input-mail').val( value.val );
-				} else if (value.param_name == 'pass') {
+				} else if (value.param_name == 'gmail_pass') {
 					$('.im-config-window .im-input-pass').val( value.val );
+				} else if (value.param_name == 'test_emails') {
+					$('.tab-name-test-emails .im-test-email').each(function(ind, el) {
+						$(el).val(value.val[ind]);
+					});
 				}
-
 			});
-
-
 		}
 	});
 }

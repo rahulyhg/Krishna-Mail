@@ -134,13 +134,17 @@ if ( $action == 'get_table_data') {
 
 
 if ( $action == 'get_config_data' ) {
-	$sql = "SELECT * FROM mail.params";
+	$sql = "SELECT * FROM mail.options";
 	$result = mysqli_query($connection, $sql);
 
 	if (mysqli_num_rows($result) > 0) {
 		while($row = mysqli_fetch_assoc($result)) {
-			$params_data[] = $row;
+			$options_data[] = $row;
 		}
+	}
+
+	if ($options_data[3][val] != '') {
+		$options_data[3][val] = unserialize($options_data[3][val]);
 	}
 
 	$sql = "SELECT * FROM mail.messages";
@@ -152,7 +156,24 @@ if ( $action == 'get_config_data' ) {
 		}
 	}
 
-	echo json_encode(['params_data' => $params_data, 'messages_data' => $messages_data, 'status' => true]);
+	echo json_encode(['options_data' => $options_data, 'messages_data' => $messages_data, 'status' => true]);
+}
+
+
+if ( $action == 'test_emails_save' ) {
+	$test_emails = json_decode(stripslashes( $_POST['test_emails'] ));
+	
+	$test_emails = serialize($test_emails);
+
+
+	//$test_emails = str_replace("\"", '\"', $test_emails);
+
+	$sql = "UPDATE mail.options SET val='".$test_emails."' WHERE param_name='test_emails'";
+
+	$result = mysqli_query($connection, $sql);
+
+	echo json_encode(['status' => $result]);
+
 }
 
 //mysqli_close($connection);
