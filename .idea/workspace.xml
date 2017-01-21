@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/js/kernel.js" line="186" mnemonic="0" />
+    <bookmark url="file://$PROJECT_DIR$/js/kernel.js" line="188" mnemonic="0" />
+    <bookmark url="file://$PROJECT_DIR$/js/kernel.js" line="72" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba5b182f-ac2f-4cfc-958c-d2edb6cbdd62" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajax/ajax_actions.php" afterPath="$PROJECT_DIR$/ajax/ajax_actions.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/styles.less" afterPath="$PROJECT_DIR$/css/styles.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/kernel.js" afterPath="$PROJECT_DIR$/js/kernel.js" />
     </list>
     <ignored path="mail.local.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,13 +98,9 @@
               <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/index.php">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="384">
-                      <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
-                      <folding>
-                        <element signature="e#6#28#0#PHP" expanded="true" />
-                        <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-                        <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-                      </folding>
+                    <state relative-caret-position="352">
+                      <caret line="41" column="44" lean-forward="false" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+                      <folding />
                     </state>
                   </provider>
                 </entry>
@@ -113,26 +112,36 @@
               <file leaf-file-name="ajax_actions.php" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/ajax/ajax_actions.php">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="80">
-                      <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+                    <state relative-caret-position="58">
+                      <caret line="206" column="31" lean-forward="false" selection-start-line="206" selection-start-column="31" selection-end-line="206" selection-end-column="31" />
                       <folding>
                         <element signature="e#270#2161#0#PHP" expanded="false" />
                         <element signature="e#2707#2986#0#PHP" expanded="false" />
                         <element signature="e#2988#3597#0#PHP" expanded="false" />
-                        <marker date="1484232274080" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
-                        <marker date="1484232274080" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
-                        <marker date="1484232274080" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
-                        <marker date="1484232274080" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
-                        <marker date="1484232274080" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
-                        <marker date="1484232274080" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
-                        <marker date="1484232274080" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
-                        <marker date="1484232274080" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
-                        <marker date="1484232274080" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
-                        <marker date="1484232274080" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
-                        <marker date="1484232274080" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
-                        <marker date="1484232274080" expanded="true" signature="4660:4685" ph="SELECT * FRO... params" />
-                        <marker date="1484232274080" expanded="true" signature="4859:4886" ph="SELECT * FRO... messages" />
+                        <marker date="1484916076414" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
+                        <marker date="1484916076414" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
+                        <marker date="1484916076414" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
+                        <marker date="1484916076414" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
+                        <marker date="1484916076414" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
+                        <marker date="1484916076414" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
+                        <marker date="1484916076414" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
+                        <marker date="1484916076414" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
+                        <marker date="1484916076414" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
+                        <marker date="1484916076414" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
+                        <marker date="1484916076414" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
+                        <marker date="1484916076414" expanded="true" signature="4715:4741" ph="SELECT * FRO... options" />
+                        <marker date="1484916076414" expanded="true" signature="6594:6645" ph="DELETE FROM " />
                       </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+              <file leaf-file-name="standard_1.php" pinned="false" current-in-tab="false">
+                <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_1.php">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="15936">
+                      <caret line="996" column="16" lean-forward="false" selection-start-line="996" selection-start-column="9" selection-end-line="996" selection-end-column="16" />
+                      <folding />
                     </state>
                   </provider>
                 </entry>
@@ -144,72 +153,34 @@
       <split-second>
         <splitter split-orientation="vertical" split-proportion="0.5709571">
           <split-first>
-            <splitter split-orientation="vertical" split-proportion="0.5">
-              <split-first>
-                <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-                  <file leaf-file-name="kernel.js" pinned="false" current-in-tab="true">
-                    <entry file="file://$PROJECT_DIR$/js/kernel.js">
-                      <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="16">
-                          <caret line="222" column="20" lean-forward="false" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
-                          <folding>
-                            <element signature="e#871#1482#0" expanded="false" />
-                            <element signature="e#1527#2102#0" expanded="false" />
-                          </folding>
-                        </state>
-                      </provider>
-                    </entry>
-                  </file>
-                </leaf>
-              </split-first>
-              <split-second>
-                <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-                  <file leaf-file-name="mail.params" pinned="false" current-in-tab="true">
-                    <entry file="dbDummy://dbtable:/de8d0f6e/2530ca1a-ccc5-4c4b-89e0-50fd21c4a7a9/mail.params">
-                      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                        <state>
-                          <filtering enabled="true" />
-                        </state>
-                      </provider>
-                      <provider editor-type-id="text-editor">
-                        <state relative-caret-position="0">
-                          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                          <folding />
-                        </state>
-                      </provider>
-                    </entry>
-                  </file>
-                </leaf>
-              </split-second>
-            </splitter>
+            <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+              <file leaf-file-name="kernel.js" pinned="false" current-in-tab="true">
+                <entry file="file://$PROJECT_DIR$/js/kernel.js">
+                  <provider selected="true" editor-type-id="text-editor">
+                    <state relative-caret-position="329">
+                      <caret line="300" column="4" lean-forward="true" selection-start-line="300" selection-start-column="4" selection-end-line="300" selection-end-column="4" />
+                      <folding>
+                        <element signature="e#5392#6065#0" expanded="false" />
+                      </folding>
+                    </state>
+                  </provider>
+                </entry>
+              </file>
+            </leaf>
           </split-first>
           <split-second>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
               <file leaf-file-name="styles.less" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/css/styles.less">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="179">
-                      <caret line="394" column="14" lean-forward="true" selection-start-line="394" selection-start-column="14" selection-end-line="394" selection-end-column="18" />
+                    <state relative-caret-position="47">
+                      <caret line="268" column="23" lean-forward="false" selection-start-line="268" selection-start-column="23" selection-end-line="268" selection-end-column="23" />
                       <folding>
                         <element signature="e#2955#3052#0" expanded="false" />
                         <element signature="e#3063#3080#0" expanded="false" />
                         <element signature="e#3092#3110#0" expanded="false" />
-                        <element signature="e#3211#13274#0" expanded="false" />
-                        <element signature="e#4486#9575#0" expanded="false" />
-                        <element signature="e#9591#12438#0" expanded="false" />
-                        <element signature="e#9776#12314#0" expanded="false" />
-                        <element signature="e#12452#13272#0" expanded="false" />
-                        <element signature="e#13540#13741#0" expanded="false" />
-                        <element signature="e#13757#14148#0" expanded="false" />
-                        <element signature="e#15519#15587#0" expanded="false" />
-                        <element signature="e#15609#15739#0" expanded="false" />
-                        <element signature="e#15760#15958#0" expanded="false" />
-                        <element signature="e#15969#16146#0" expanded="false" />
-                        <element signature="e#16148#16251#0" expanded="false" />
-                        <element signature="e#16253#16359#0" expanded="false" />
-                        <element signature="e#16361#16469#0" expanded="false" />
-                        <element signature="e#16471#16582#0" expanded="false" />
-                        <element signature="e#16601#16788#0" expanded="false" />
+                        <element signature="e#3223#5229#0" expanded="false" />
+                        <element signature="e#5241#5619#0" expanded="false" />
                       </folding>
                     </state>
                   </provider>
@@ -224,6 +195,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>curta</find>
+      <find>message</find>
+      <find>close</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -234,10 +207,10 @@
       <list>
         <option value="$PROJECT_DIR$/send.php" />
         <option value="$PROJECT_DIR$/ajax_actions.php" />
-        <option value="$PROJECT_DIR$/js/kernel.js" />
         <option value="$PROJECT_DIR$/ajax/ajax_actions.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/css/styles.less" />
+        <option value="$PROJECT_DIR$/js/kernel.js" />
       </list>
     </option>
   </component>
@@ -253,9 +226,9 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-1" />
-    <option name="y" value="27" />
+    <option name="y" value="-1" />
     <option name="width" value="1922" />
-    <option name="height" value="1030" />
+    <option name="height" value="1051" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -410,11 +383,13 @@
       <workItem from="1484137898557" duration="3582000" />
       <workItem from="1484225028755" duration="7350000" />
       <workItem from="1484399537303" duration="1568000" />
+      <workItem from="1484914302142" duration="828000" />
+      <workItem from="1485001824586" duration="2309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36493000" />
+    <option name="totallyTimeSpent" value="39630000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -426,10 +401,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="27" width="1922" height="1030" extended-state="6" />
+    <frame x="-1" y="-1" width="1922" height="1051" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11022364" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11235357" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12193823" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -467,52 +442,25 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ajax/ajax_actions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="117" column="85" lean-forward="false" selection-start-line="117" selection-start-column="85" selection-end-line="117" selection-end-column="85" />
-          <folding>
-            <element signature="e#270#2161#0#PHP" expanded="false" />
-            <element signature="e#2707#2986#0#PHP" expanded="false" />
-            <element signature="e#2988#3597#0#PHP" expanded="false" />
-            <marker date="1484232274080" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
-            <marker date="1484232274080" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="4660:4685" ph="SELECT * FRO... params" />
-            <marker date="1484232274080" expanded="true" signature="4859:4886" ph="SELECT * FRO... messages" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/kernel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2816">
           <caret line="222" column="20" lean-forward="false" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/de8d0f6e/2530ca1a-ccc5-4c4b-89e0-50fd21c4a7a9/mail.params">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -524,22 +472,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -548,11 +482,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1494">
           <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -564,19 +494,19 @@
             <element signature="e#270#2161#0#PHP" expanded="false" />
             <element signature="e#2707#2986#0#PHP" expanded="false" />
             <element signature="e#2988#3597#0#PHP" expanded="false" />
-            <marker date="1484232274080" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
-            <marker date="1484232274080" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="4660:4685" ph="SELECT * FRO... params" />
-            <marker date="1484232274080" expanded="true" signature="4859:4886" ph="SELECT * FRO... messages" />
+            <marker date="1484916076414" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
+            <marker date="1484916076414" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="4715:4741" ph="SELECT * FRO... options" />
+            <marker date="1484916076414" expanded="true" signature="6594:6645" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -593,8 +523,7 @@
         <state relative-caret-position="1404">
           <caret line="78" column="27" lean-forward="false" selection-start-line="78" selection-start-column="27" selection-end-line="78" selection-end-column="27" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -607,22 +536,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -631,11 +546,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1458">
           <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -647,19 +558,19 @@
             <element signature="e#270#2161#0#PHP" expanded="false" />
             <element signature="e#2707#2986#0#PHP" expanded="false" />
             <element signature="e#2988#3597#0#PHP" expanded="false" />
-            <marker date="1484232274080" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
-            <marker date="1484232274080" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="4660:4685" ph="SELECT * FRO... params" />
-            <marker date="1484232274080" expanded="true" signature="4859:4886" ph="SELECT * FRO... messages" />
+            <marker date="1484916076414" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
+            <marker date="1484916076414" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="4715:4741" ph="SELECT * FRO... options" />
+            <marker date="1484916076414" expanded="true" signature="6594:6645" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
@@ -672,22 +583,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -697,8 +594,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -707,11 +603,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -723,22 +615,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -748,8 +626,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -758,11 +635,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="954">
           <caret line="53" column="62" lean-forward="false" selection-start-line="53" selection-start-column="56" selection-end-line="53" selection-end-column="62" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -775,22 +648,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -800,8 +659,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -811,11 +669,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1350">
           <caret line="75" column="52" lean-forward="false" selection-start-line="75" selection-start-column="52" selection-end-line="75" selection-end-column="52" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -827,22 +681,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -852,8 +692,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -862,11 +701,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1404">
           <caret line="78" column="18" lean-forward="true" selection-start-line="78" selection-start-column="18" selection-end-line="78" selection-end-column="18" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -878,22 +713,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -903,8 +724,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -913,11 +733,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1512">
           <caret line="84" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -929,22 +745,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -954,8 +756,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -964,11 +765,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1218">
           <caret line="87" column="84" lean-forward="false" selection-start-line="87" selection-start-column="84" selection-end-line="87" selection-end-column="84" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -980,22 +777,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1005,8 +788,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1015,11 +797,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1031,22 +809,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1056,8 +820,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1066,11 +829,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="196">
           <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1082,22 +841,8 @@
             <element signature="e#2955#3052#0" expanded="false" />
             <element signature="e#3063#3080#0" expanded="false" />
             <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1106,11 +851,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1118,11 +859,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1144,14 +881,14 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/de8d0f6e/2530ca1a-ccc5-4c4b-89e0-50fd21c4a7a9/mail.mails">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -1163,90 +900,78 @@
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/de8d0f6e/2530ca1a-ccc5-4c4b-89e0-50fd21c4a7a9/mail.params">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/kernel.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_1.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="222" column="20" lean-forward="false" selection-start-line="222" selection-start-column="20" selection-end-line="222" selection-end-column="20" />
-          <folding>
-            <element signature="e#871#1482#0" expanded="false" />
-            <element signature="e#1527#2102#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="15936">
+          <caret line="996" column="16" lean-forward="false" selection-start-line="996" selection-start-column="9" selection-end-line="996" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ajax/ajax_actions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+        <state relative-caret-position="58">
+          <caret line="206" column="31" lean-forward="false" selection-start-line="206" selection-start-column="31" selection-end-line="206" selection-end-column="31" />
           <folding>
             <element signature="e#270#2161#0#PHP" expanded="false" />
             <element signature="e#2707#2986#0#PHP" expanded="false" />
             <element signature="e#2988#3597#0#PHP" expanded="false" />
-            <marker date="1484232274080" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
-            <marker date="1484232274080" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
-            <marker date="1484232274080" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
-            <marker date="1484232274080" expanded="true" signature="4660:4685" ph="SELECT * FRO... params" />
-            <marker date="1484232274080" expanded="true" signature="4859:4886" ph="SELECT * FRO... messages" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/styles.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="394" column="14" lean-forward="true" selection-start-line="394" selection-start-column="14" selection-end-line="394" selection-end-column="18" />
-          <folding>
-            <element signature="e#2955#3052#0" expanded="false" />
-            <element signature="e#3063#3080#0" expanded="false" />
-            <element signature="e#3092#3110#0" expanded="false" />
-            <element signature="e#3211#13274#0" expanded="false" />
-            <element signature="e#4486#9575#0" expanded="false" />
-            <element signature="e#9591#12438#0" expanded="false" />
-            <element signature="e#9776#12314#0" expanded="false" />
-            <element signature="e#12452#13272#0" expanded="false" />
-            <element signature="e#13540#13741#0" expanded="false" />
-            <element signature="e#13757#14148#0" expanded="false" />
-            <element signature="e#15519#15587#0" expanded="false" />
-            <element signature="e#15609#15739#0" expanded="false" />
-            <element signature="e#15760#15958#0" expanded="false" />
-            <element signature="e#15969#16146#0" expanded="false" />
-            <element signature="e#16148#16251#0" expanded="false" />
-            <element signature="e#16253#16359#0" expanded="false" />
-            <element signature="e#16361#16469#0" expanded="false" />
-            <element signature="e#16471#16582#0" expanded="false" />
-            <element signature="e#16601#16788#0" expanded="false" />
+            <marker date="1484916076414" expanded="true" signature="359:404" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="1931:1969" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2199:2240" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2380:2425" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="2813:2847" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2870" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2871" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="2813:2895" ph="UPDATE mail.... " />
+            <marker date="1484916076414" expanded="true" signature="3163:3219" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="3389:3502" ph="INSERT INTO `mail`.`mails`... " />
+            <marker date="1484916076414" expanded="true" signature="3644:3668" ph="SELECT * FRO... mails" />
+            <marker date="1484916076414" expanded="true" signature="4715:4741" ph="SELECT * FRO... options" />
+            <marker date="1484916076414" expanded="true" signature="6594:6645" ph="DELETE FROM " />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="85" column="18" lean-forward="true" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+        <state relative-caret-position="352">
+          <caret line="41" column="44" lean-forward="false" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/styles.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="268" column="23" lean-forward="false" selection-start-line="268" selection-start-column="23" selection-end-line="268" selection-end-column="23" />
           <folding>
-            <element signature="e#6#28#0#PHP" expanded="true" />
-            <marker date="1484400515151" expanded="true" signature="230:254" ph="SELECT * FRO... mails" />
-            <marker date="1484400515151" expanded="true" signature="437:462" ph="SELECT * FRO... params" />
+            <element signature="e#2955#3052#0" expanded="false" />
+            <element signature="e#3063#3080#0" expanded="false" />
+            <element signature="e#3092#3110#0" expanded="false" />
+            <element signature="e#3223#5229#0" expanded="false" />
+            <element signature="e#5241#5619#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/kernel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="300" column="4" lean-forward="true" selection-start-line="300" selection-start-column="4" selection-end-line="300" selection-end-column="4" />
+          <folding>
+            <element signature="e#5392#6065#0" expanded="false" />
           </folding>
         </state>
       </provider>

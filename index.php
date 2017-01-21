@@ -12,12 +12,11 @@
 	<script src="../js/less.min.js" type="text/javascript"></script>
 	<script src="../js/kernel.js" type="text/javascript"></script>
 	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-
 </head>
 
 <body>
 	<div class="curtain"></div>
-	<div style='margin-top: 20px;'>
+	<div style='padding-top: 20px;'>
 		<div class="im-table-container">
 			<div class="im-header">
 				<div class="im-name">Smart emails sender</div>
@@ -26,11 +25,36 @@
 
 			<div class="im-control-container">
 				<div class="im-control">
-					<button class="im-button im-add-button green im-left">Add Mail</button>
-					<button class="im-button im-config-button yellow im-left">Config</button>
-					<button class="im-button im-reset-button red im-right">Reset</button>
-					<button class="im-button im-send-button green im-right">Send</button>
-					<button class="im-button im-send-test-button yellow im-right">Test</button>
+					<table class="im-button-table">
+						<tr>
+							<td align="left">
+								<div class="button-container">
+									<button class="im-button im-add-button green">Add Mail</button>
+									<button class="im-button im-delete-button">Delete Mail</button>
+								</div>
+							</td>
+							<td align="center">
+								<div class="button-container">
+									<button class="im-button im-send-button green">Send</button>
+									<button class="im-button im-reset-button red">Reset</button>
+								</div>
+							</td>
+							<td align="right">
+								<div class="button-container">
+									<button class="im-button im-send-test-button yellow">Test</button>
+									<button class="im-button im-config-button yellow">Config</button>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<div class="im-control-left">
+					</div>
+					<div class="im-control-center">
+						<div style='margin: 0 auto; width: 240px;'>
+						</div>
+					</div>
+					<div class="im-control-right">
+					</div>
 				</div>
 			</div>
 			<div class="im-email-tc">

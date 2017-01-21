@@ -1,8 +1,9 @@
 var mail = '', pass = '', sending = false, interval = 5;
-var current_email = '';
 var last_id = -1;
-var process_window_name = '';
 var tab_name = "tab-name-config";
+var del_button_status = false;
+var del_email_ids = [];
+var global_window_name = '';
 
 $( document ).ready(function() {
 	tinymce.init({
@@ -18,7 +19,6 @@ $( document ).ready(function() {
 		content_css: '//www.tinymce.com/css/codepen.min.css'
 	});
 
-
 	$('.im-ul-tab .im-li-tab-item').click( function() {
 		$('.im-ul-tab .im-li-tab-item').removeClass('active');
 		$(this).addClass('active');
@@ -31,10 +31,48 @@ $( document ).ready(function() {
 	get_last_id(false);
 	get_table_data();
 
+	$(document).on('change', ".im-mail-checkbox", function () {
+		del_button_status = false;
+		del_email_ids = [];
+		$('.im-mail-checkbox').each(function(index, el) {
+			if ( $(el).prop( "checked") == true ) {
+				del_email_ids.push($(el).attr('im-mail-id'));
+				del_button_status = true;
+			}
+		});
+
+		if ( del_button_status == true ) {
+			$('.im-delete-button').addClass('red');
+		} else {
+			$('.im-delete-button').removeClass('red');
+		}
+	});
+
 	$('.im-add-button').click(function () {
-		close_all_window();
-		center('.im-add-mail-window');
-		$('.im-add-mail-window').addClass('active');
+		im_window( 'im-add-mail-window', true, true, true );
+	});
+
+	$('.im-delete-button').click(function () {
+		if ( del_email_ids.length > 0 ) {
+			var email_ids = JSON.stringify(del_email_ids);
+
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/ajax_actions.php',
+				data: { action: 'emails_delete', email_ids: email_ids},
+				success: function(data){
+					data = JSON.parse(data);
+					if ( data.status == true ) {
+						message(null, "Emails deleted successfully", '');
+						get_table_data();
+						$('.im-delete-button').removeClass('red');
+					}
+				}
+			});
+		} else {
+			message(null, 'Not be allocated us one element', 'error');
+
+		}
 	});
 
 	$('.im-send-button').click(function () {
@@ -89,14 +127,26 @@ $( document ).ready(function() {
 
 	$('.im-config-button').click(function () {
 		get_config_data();
-		close_all_window();
-		center('.im-config-window');
-		$('.im-config-window').addClass('active');
 	});
 
 	$('.im-config-window .im-save-button').click(function () {
 		if (tab_name == 'tab-name-config') {
-		
+			var interval =  $('.im-config-window .im-input-interval').val();
+			var gmail_account =  $('.im-config-window .im-input-mail').val();
+			var gmail_pass =  $('.im-config-window .im-input-pass').val();
+			
+
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/ajax_actions.php',
+				data: { action: 'account_save', interval: interval, gmail_account: gmail_account, gmail_pass:gmail_pass },
+				success: function(data){
+					data = JSON.parse(data);
+					if ( data.status == true ) {
+						message('im-config-window', 'Account config saved successfully', '');
+					}
+				}
+			});
 		} else if (tab_name == 'tab-name-message') {
 			var subject =  $('.im-config-window .im-subject').val();
 			var content = tinyMCE.activeEditor.getContent({format : 'raw'});
@@ -108,7 +158,7 @@ $( document ).ready(function() {
 				success: function(data){
 					data = JSON.parse(data);
 					if ( data.status == true ) {
-						message('Email message saved successfully');
+						message('im-config-window', 'Email message saved successfully', '');
 					}
 				}
 			});
@@ -131,7 +181,7 @@ $( document ).ready(function() {
 				success: function(data){
 					data = JSON.parse(data);
 					if ( data.status == true ) {
-						message("Test Emails saved successfully");
+						message('im-config-window', "Test Emails saved successfully", '');
 					}
 				}
 			});
@@ -150,22 +200,27 @@ $( document ).ready(function() {
 			success: function(data){
 				data = JSON.parse(data);
 				if ( data.status == true ) {
-					message('New contact successfully added');
+					message('im-add-mail-window', 'New contact successfully added', '');
 					get_table_data();
 				} else {
-					message(data.error);
+					message('im-add-mail-window', data.error, 'error');
 				}
 			}
 		});
 	});
 
-	$('.im-message-window .im-button').click(function () {
-		$('.im-message-window').removeClass('active');
-	});
-
 	$('.im-window .im-close-button').click(function () {
-		console.log('close');
-		$(this).closest('.im-window').removeClass('active');
+		var currunt_window = $(this).closest('.im-window');
+		
+		if ( $(currunt_window).hasClass('im-add-mail-window') ) {
+			im_window('im-add-mail-window', false, false, false);
+		} else if ( $(currunt_window).hasClass('im-config-window') ) {
+			im_window('im-config-window', false, false, false);
+		} else if ( $(currunt_window).hasClass('im-message-window') ) {
+			im_window('im-message-window', false, null, null);
+			if (global_window_name != null)
+				$('.'+global_window_name).removeClass('back');
+		}
 	});
 
 	setInterval( function () {
@@ -207,7 +262,7 @@ function get_last_id ( flag ) {
 			data = JSON.parse(data);
 			last_id = data.id;
 			if (flag == true) {
-				if (last_id == -1) {
+				if ( last_id == -1 ) {
 					sending = false;
 				} else {
 					sending = true;
@@ -229,23 +284,31 @@ function get_table_data () {
 	});
 }
 
-function center (className) {
-	$(className).css("top", ( $(window).height() - $(className).height() ) / 2  + "px");
-	$(className).css("left", ( $(window).width() - $(className).width() ) / 2 + "px");
-}
-
 function close_all_window() {
 	$('.im-window').removeClass('active');
 }
 
-function message(msg) {
-	$('.im-add-mail-window').addClass('back');
+function message(window_name, message, additional_class) {
+	$('.im-message-window .im-window-top-border').removeClass('error');
+	$('.im-message-window .im-window-top-border').removeClass('warning');
+
+	if (window_name != null)
+		$('.'+window_name).addClass('back');
+
+	global_window_name = window_name;
+
+	if (additional_class != '') {
+		$('.im-message-window .im-window-top-border').addClass(additional_class);
+	}
 
 	center('.im-message-window');
 	$('.im-message-window').addClass('active');
-	$('.im-message-text').html(msg);
-}
+	setTimeout(function(){
+		$('.im-message-window').addClass('opacity');
+	}, 100);
 
+	$('.im-message-text').html(message);
+}
 
 function get_config_data() {
 	$.ajax({
@@ -254,19 +317,84 @@ function get_config_data() {
 		data: { action: 'get_config_data'},
 		success: function(data){
 			data = JSON.parse(data);
-			$.each(data.options_data, function (index, value) {
-				if (value.param_name == 'send_interval') {
-					$('.im-config-window .im-input-interval').val( value.val );
-				} else if (value.param_name == 'gmail_account') {
-					$('.im-config-window .im-input-mail').val( value.val );
-				} else if (value.param_name == 'gmail_pass') {
-					$('.im-config-window .im-input-pass').val( value.val );
-				} else if (value.param_name == 'test_emails') {
-					$('.tab-name-test-emails .im-test-email').each(function(ind, el) {
-						$(el).val(value.val[ind]);
-					});
-				}
-			});
+			if ( data.status == true ) {
+				$.each(data.options_data, function (index, value) {
+					if (value.param_name == 'send_interval') {
+						$('.im-config-window .im-input-interval').val( value.val );
+					} else if (value.param_name == 'gmail_account') {
+						$('.im-config-window .im-input-mail').val( value.val );
+					} else if (value.param_name == 'gmail_pass') {
+						$('.im-config-window .im-input-pass').val( value.val );
+					} else if (value.param_name == 'test_emails') {
+						$('.tab-name-test-emails .im-test-email').each(function(ind, el) {
+							$(el).val(value.val[ind]);
+						});
+					}
+				});
+				
+				im_window( 'im-config-window', true, true, true );
+			}
 		}
 	});
+};
+
+function clear_input( className ) {
+	$('.' + className).find('.im-input').val('');
+}
+
+function curtain( status ) {
+	if ( status == true ) {
+		$('.curtain').addClass('active');
+		setTimeout(function(){
+			$('.curtain').addClass('opacity');
+		}, 100);
+	} else if ( status == false ) {
+		$('.curtain').removeClass('opacity');
+		setTimeout(function(){
+			$('.curtain').removeClass('active');
+		}, 200);
+	}
+}
+
+function im_window( window_name, window_status, curtain_status, close_all_window_status ) {
+	var time = 0;
+	window_name = '.'+window_name;
+	center( window_name );
+	
+	if ( window_status == true ) {
+		time = 300;
+	} else if (window_status == false ) {
+		time = 0;
+	}
+
+	if ( close_all_window_status == true ) {
+		$('.im-window').removeClass('opacity');
+		setTimeout(function(){
+			$('.im-window').removeClass('active');
+		}, 200);
+	}
+
+	if ( curtain_status == true )
+		curtain( true );
+	else if ( curtain_status == false )
+		curtain( false );
+
+	setTimeout(function(){
+		if ( window_status == true ) {
+			$(window_name).addClass('active');
+			setTimeout(function(){
+				$(window_name).addClass('opacity');
+			}, 100);
+		} else if ( window_status == false ) {
+			$(window_name).removeClass('opacity');
+			setTimeout(function(){
+				$(window_name).removeClass('active');
+			}, 200);
+		}
+	}, time);
+}
+
+function center (className) {
+	$(className).css("top", ( $(window).height() - $(className).height() ) / 2  + "px");
+	$(className).css("left", ( $(window).width() - $(className).width() ) / 2 + "px");
 }

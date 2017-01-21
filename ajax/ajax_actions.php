@@ -115,11 +115,11 @@ if ( $action == 'get_table_data') {
 	$result = mysqli_query($connection, $sql);
 
 	if (mysqli_num_rows($result) > 0) {
-		$html_response = '<tr><td align=\'center\'><input type=\'checkbox\'></td><td align=\'center\'>ID</td><td>Name</td><td>Phone</td><td>Email</td><td align=\'center\'>St</td></tr>';
+		//$html_response = '<tr><td align=\'center\'><input type=\'checkbox\'></td><td align=\'center\'>ID</td><td>Name</td><td>Phone</td><td>Email</td><td align=\'center\'>St</td></tr>';
 		while($row = mysqli_fetch_assoc($result)) {
 			$status = ( $row['send'] == 1 ) ? 'active': '';
 			$html_response .= "<tr class='im-mail-item-".$row['id']."'>";
-			$html_response .= "<td width='20'><input type='checkbox'></td>";
+			$html_response .= "<td width='20'><input type='checkbox' class='im-mail-checkbox' im-mail-id='".$row['id']."'></td>";
 			$html_response .= "<td width='20' align='center'>".$row['id']."</td>";
 			$html_response .= "<td>".$row['name']."</td>";
 			$html_response .= "<td>".$row['phone']."</td>";
@@ -143,6 +143,10 @@ if ( $action == 'get_config_data' ) {
 		}
 	}
 
+	// if ($options_data[2][val] != '') {
+	// 	$options_data[2][val] = base64_decode($options_data[2][val]);
+	// }
+
 	if ($options_data[3][val] != '') {
 		$options_data[3][val] = unserialize($options_data[3][val]);
 	}
@@ -155,10 +159,28 @@ if ( $action == 'get_config_data' ) {
 			$messages_data[] = $row;
 		}
 	}
-
+	
 	echo json_encode(['options_data' => $options_data, 'messages_data' => $messages_data, 'status' => true]);
 }
 
+
+if ( $action == 'account_save' ) {
+	$interval = $_POST['interval'];
+	$gmail_account = $_POST['gmail_account'];
+	$gmail_pass = base64_encode($_POST['gmail_pass']);
+
+	$sql = "UPDATE mail.options SET val='".$interval."' WHERE param_name='send_interval'";
+	$result = mysqli_query($connection, $sql);
+
+	$sql = "UPDATE mail.options SET val='".$gmail_account."' WHERE param_name='gmail_account'";
+	$result = mysqli_query($connection, $sql);
+
+	$sql = "UPDATE mail.options SET val='".$gmail_pass."' WHERE param_name='gmail_pass'";
+	$result = mysqli_query($connection, $sql);
+
+	echo json_encode(['status' => $result]);
+
+};
 
 if ( $action == 'test_emails_save' ) {
 	$test_emails = json_decode(stripslashes( $_POST['test_emails'] ));
@@ -176,6 +198,18 @@ if ( $action == 'test_emails_save' ) {
 
 }
 
-//mysqli_close($connection);
+if ( $action == 'emails_delete' ) {
+	$email_ids = json_decode(stripslashes( $_POST['email_ids'] ));
+
+	$email_ids = implode(', ', $email_ids);
+
+	$sql = "DELETE FROM mail.mails WHERE id IN (".$email_ids.")";
+	$result = mysqli_query($connection, $sql);
+
+	echo json_encode(['status' => $result]);
+}
+
+
+mysqli_close($connection);
 
 ?>
