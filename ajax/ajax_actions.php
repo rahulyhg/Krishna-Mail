@@ -113,7 +113,7 @@ if ( $action == 'new_contact_save') {
 if ( $action == 'get_table_data') {
 	$sql = "SELECT * FROM mail.mails";
 	$result = mysqli_query($connection, $sql);
-
+	$html_response = "";
 	if (mysqli_num_rows($result) > 0) {
 		//$html_response = '<tr><td align=\'center\'><input type=\'checkbox\'></td><td align=\'center\'>ID</td><td>Name</td><td>Phone</td><td>Email</td><td align=\'center\'>St</td></tr>';
 		while($row = mysqli_fetch_assoc($result)) {
@@ -143,9 +143,9 @@ if ( $action == 'get_config_data' ) {
 		}
 	}
 
-	// if ($options_data[2][val] != '') {
-	// 	$options_data[2][val] = base64_decode($options_data[2][val]);
-	// }
+	if ($options_data[2][val] != '') {
+		$options_data[2][val] = base64_decode($options_data[2][val]);
+	}
 
 	if ($options_data[3][val] != '') {
 		$options_data[3][val] = unserialize($options_data[3][val]);
@@ -156,8 +156,12 @@ if ( $action == 'get_config_data' ) {
 
 	if (mysqli_num_rows($result) > 0) {
 		while($row = mysqli_fetch_assoc($result)) {
+			if ($row['files'] != "")
+				$row['files'] = unserialize($row['files']);
+			
 			$messages_data[] = $row;
 		}
+
 	}
 	
 	echo json_encode(['options_data' => $options_data, 'messages_data' => $messages_data, 'status' => true]);
@@ -187,9 +191,6 @@ if ( $action == 'test_emails_save' ) {
 	
 	$test_emails = serialize($test_emails);
 
-
-	//$test_emails = str_replace("\"", '\"', $test_emails);
-
 	$sql = "UPDATE mail.options SET val='".$test_emails."' WHERE param_name='test_emails'";
 
 	$result = mysqli_query($connection, $sql);
@@ -207,6 +208,160 @@ if ( $action == 'emails_delete' ) {
 	$result = mysqli_query($connection, $sql);
 
 	echo json_encode(['status' => $result]);
+}
+
+if ( $action == 'send_test' ) {
+	$sql = "SELECT * FROM mail.messages LIMIT 1";
+	$messages = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($messages) > 0) {
+		while($row = mysqli_fetch_assoc($messages)) {
+			if ( $row['files'] != "" ) {
+				$row['files'] = unserialize($row['files']);
+			}
+			
+			$messages_data = $row;
+		}
+	}
+
+	$sql = "SELECT * FROM mail.options";
+	$options = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($options) > 0) {
+		while($row = mysqli_fetch_assoc($options)) {
+			$options_data[] = $row;
+		}
+	}
+	
+	$test_emails = unserialize( $options_data[3]['val'] );
+
+	require '../lib/PHPMailer/PHPMailerAutoload.php';
+
+	$mail = new PHPMailer;
+
+	$mail->isSMTP();                                      // Set mailer to use SMTP
+	$mail->Host = 'smtp.gmail.com';                       // Specify main and backup server
+	$mail->SMTPAuth = true;                               // Enable SMTP authentication
+	$mail->Username = $options_data[1]['val'];                   // SMTP username
+	$mail->Password = base64_decode($options_data[2]['val']);               // SMTP password
+	$mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+	$mail->Port = 587;                                    //Set the SMTP port number - 587 for authenticated TLS
+	$mail->setFrom($options_data[1]['val'], 'Igor Melnik');     //Set who the message is to be sent from
+	
+	//$mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+	$mail->isHTML(true);                                  // Set email format to HTML
+
+	$mail->Subject = $messages_data['subject'];
+	$mail->Body    = $messages_data['message'];
+	$mail->altBody = $messages_data['message'];
+
+	if (count($messages_data['files']) > 0 ) {
+		foreach ($messages_data['files'] as $key => $file) {
+			$mail->addAttachment('../uploads/'.$file);
+		}
+	}
+
+	foreach ( $test_emails as $email ) {
+		if ($email != "")
+			$mail->addAddress($email);
+	}
+
+	if(!$mail->send()) {
+		echo json_encode(['status' => false, 'error' => 'Message could not be sent -> '.$mail->ErrorInfo]);
+		exit;
+	}
+
+	echo json_encode(['status' => true]);
+}
+
+if ( $action == 'add_file_to_message' ) {
+	$message_id = $_POST['message_id'];
+	$file_name = $_POST['file_name'];
+
+	$sql = "SELECT * FROM mail.messages WHERE id=".$message_id." LIMIT 1";
+	$messages = mysqli_query($connection, $sql);
+
+
+	if (mysqli_num_rows($messages) > 0) {
+		while($row = mysqli_fetch_assoc($messages)) {
+			$messages_data = $row;
+		}
+
+		if ( $messages_data['files'] != "" ) {
+			$messages_data['files'] = unserialize($messages_data['files']);
+
+			if ( !in_array($file_name, $messages_data['files']) ) {
+				array_push($messages_data['files'], $file_name);
+			}
+		} else {
+			$messages_data['files'] = array();
+			array_push($messages_data['files'], $file_name);
+		}
+
+		if ( count($messages_data['files']) > 0 ) {
+			$messages_data['files'] = serialize($messages_data['files']);
+			$sql = "UPDATE mail.messages SET files='".$messages_data['files']."' WHERE id = ".$message_id;
+			$result = mysqli_query($connection, $sql);
+			echo json_encode(['status' => $result]);
+		} else {
+			echo json_encode(['status' => false]);
+		}
+	}
+};
+
+if ( $action == 'get_message_files' ) {
+	$message_id = $_POST['message_id'];
+
+	$sql = "SELECT * FROM mail.messages WHERE id=".$message_id." LIMIT 1";
+	$messages = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($messages) > 0) {
+		while($row = mysqli_fetch_assoc($messages)) {
+			$messages_data = $row;
+		}
+
+		if ( $messages_data['files'] != "" ) {
+			$messages_data['files'] = unserialize($messages_data['files']);
+		}
+	}
+
+	if ( !empty($messages_data['files']) ) {
+		echo json_encode(['status' => true, 'files' => $messages_data['files']] );
+	} else {
+		echo json_encode(['status' => false]);
+	}
+}
+
+if ( $action == 'delete_file_from_message' ) {
+	$message_id = $_POST['message_id'];
+	$file_name = $_POST['file_name'];
+
+	$sql = "SELECT * FROM mail.messages WHERE id=".$message_id." LIMIT 1";
+	$messages = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($messages) > 0) {
+		while($row = mysqli_fetch_assoc($messages)) {
+			$messages_data = $row;
+		}
+
+		if ( $messages_data['files'] != "" ) {
+			$messages_data['files'] = unserialize($messages_data['files']);
+
+			$files = array();
+			foreach ($messages_data['files'] as $value) {
+				if ( $value != $file_name ) {
+					$files[] = $value;
+				}
+			}
+
+			$messages_data['files'] = $files;
+		}
+
+		$messages_data['files'] = serialize($messages_data['files']);
+		$sql = "UPDATE mail.messages SET files='".$messages_data['files']."' WHERE id = ".$message_id;
+		$result = mysqli_query($connection, $sql);
+		echo json_encode(['status' => $result]);
+	}
 }
 
 

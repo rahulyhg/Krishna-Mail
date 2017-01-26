@@ -4,6 +4,7 @@ var tab_name = "tab-name-config";
 var del_button_status = false;
 var del_email_ids = [];
 var global_window_name = '';
+var message_id = 1;
 
 $( document ).ready(function() {
 	tinymce.init({
@@ -26,7 +27,6 @@ $( document ).ready(function() {
 		$('.im-tab-container .tab-item').removeClass('active');
 		$('.'+tab_name).addClass('active');
 	});
-
 
 	get_last_id(false);
 	get_table_data();
@@ -172,7 +172,7 @@ $( document ).ready(function() {
 				}
 			});
 			
-			test_emails = JSON.stringify(test_emails)
+			test_emails = JSON.stringify(test_emails);
 			
 			$.ajax({
 				type: 'POST',
@@ -209,14 +209,81 @@ $( document ).ready(function() {
 		});
 	});
 
-	$('.im-window .im-close-button').click(function () {
-		var currunt_window = $(this).closest('.im-window');
+	$('.im-send-test-button').click(function () {
+		$.ajax({
+			type: 'POST',
+			url: 'ajax/ajax_actions.php',
+			data: { action: 'send_test'},
+			success: function(data){
+				data = JSON.parse(data);
+				if ( data.status == true ) {
+					message(null, 'Test emails sended successfully', '');
+				} else if ( data.status == false ) {
+					message(null, data.error, 'error');
+				}
+			}
+		});
+	});
+
+	$('.im-upload-file').on('change', function() {
+		var file_data = $(this).prop('files')[0];
+		var form_data = new FormData();
+
+		form_data.append('file', file_data);
 		
-		if ( $(currunt_window).hasClass('im-add-mail-window') ) {
+		$.ajax({
+			url: '../ajax/upload_file.php',
+			dataType: 'text',
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: form_data,
+			type: 'post',
+			success: function(response){
+				response = JSON.parse(response);
+				if (response.status == true) {
+					$.ajax({
+						type: 'POST',
+						url: 'ajax/ajax_actions.php',
+						data: { action: 'add_file_to_message', message_id: message_id, file_name: response.file.name},
+						success: function(data){
+							data = JSON.parse(data);
+							if ( data.status == true ) {
+								get_message_files();
+							}
+						}
+					});
+				}
+			}
+		});
+	});
+
+	$(document).on('click', ".im-file-delete", function () {
+		var ifd = $(this);
+		var file_name = $(ifd).closest('.im-file-item').find('.op-file-name').html();
+		if ( file_name != "") {
+			$.ajax({
+				type: 'POST',
+				url: 'ajax/ajax_actions.php',
+				data: { action: 'delete_file_from_message', message_id: message_id, file_name: file_name},
+				success: function(data){
+					data = JSON.parse(data);
+					if ( data.status == true ) {
+						$(ifd).closest('.im-file-item').remove();
+					}
+				}
+			});
+		}
+	});
+
+	$('.im-window .im-close-button').click(function () {
+		var current_window = $(this).closest('.im-window');
+		
+		if ( $(current_window).hasClass('im-add-mail-window') ) {
 			im_window('im-add-mail-window', false, false, false);
-		} else if ( $(currunt_window).hasClass('im-config-window') ) {
+		} else if ( $(current_window).hasClass('im-config-window') ) {
 			im_window('im-config-window', false, false, false);
-		} else if ( $(currunt_window).hasClass('im-message-window') ) {
+		} else if ( $(current_window).hasClass('im-message-window') ) {
 			im_window('im-message-window', false, null, null);
 			if (global_window_name != null)
 				$('.'+global_window_name).removeClass('back');
@@ -252,7 +319,7 @@ $( document ).ready(function() {
 	}, interval * 1000);
 });
 
-
+// ======================  Data ====================== //
 function get_last_id ( flag ) {
 	$.ajax({
 		type: 'POST',
@@ -284,11 +351,128 @@ function get_table_data () {
 	});
 }
 
+
+function get_config_data() {
+	$.ajax({
+		type: 'POST',
+		url: 'ajax/ajax_actions.php',
+		data: { action: 'get_config_data'},
+		success: function(data){
+			data = JSON.parse(data);
+			if ( data.status == true ) {
+				$.each(data.options_data, function (index, value) {
+					if (value.param_name == 'send_interval') {
+						$('.im-config-window .im-input-interval').val( value.val );
+					} else if (value.param_name == 'gmail_account') {
+						$('.im-config-window .im-input-mail').val( value.val );
+					} else if (value.param_name == 'gmail_pass') {
+						$('.im-config-window .im-input-pass').val( value.val );
+					} else if (value.param_name == 'test_emails') {
+						$('.tab-name-test-emails .im-test-email').each(function(ind, el) {
+							$(el).val(value.val[ind]);
+						});
+					} else if (value.param_name == 'active_message') {
+						message_id = value.val;
+					}
+				});
+
+				$('.im-config-window .im-subject').val(data.messages_data[0].subject);
+				tinyMCE.activeEditor.setContent(data.messages_data[0].message, {format : 'raw'});
+				
+				build_messgae_file_list(data.messages_data[0].files);
+				
+				im_window( 'im-config-window', true, true, true );
+
+			}
+		}
+	});
+};
+
+function get_message_files() {
+	$.ajax({
+		type: 'POST',
+		url: 'ajax/ajax_actions.php',
+		data: { action: 'get_message_files', message_id: message_id},
+		success: function(response){
+			response = JSON.parse(response);
+			if ( response.status == true ) {
+				build_messgae_file_list(response.files);
+			}
+		}
+	});
+};
+
+function build_messgae_file_list (list) {
+	if ( list ) {
+		$(".im-file-container .im-file-ul").html("");
+		$.each(list, function(index, el) {
+			$(".im-file-container .im-file-ul").append("<li class='im-file-item'><div class='im-file-delete'><span>x</span></div>"+(1+index)+" - <span class='op-file-name'>"+el+"</span></li>")
+		});
+	}
+}
+
+// ======================  Windows ====================== //
+function curtain( status ) {
+	if ( status == true ) {
+		$('.curtain').addClass('active');
+		setTimeout(function(){
+			$('.curtain').addClass('opacity');
+		}, 100);
+	} else if ( status == false ) {
+		$('.curtain').removeClass('opacity');
+		setTimeout(function(){
+			$('.curtain').removeClass('active');
+		}, 400);
+	}
+}
+
+function im_window( window_name, window_status, curtain_status, close_all_window_status ) {
+	var time = 0;
+	window_name = '.'+window_name;
+	center( window_name );
+	
+	if ( window_status == true ) {
+		time = 500;
+	} else if (window_status == false ) {
+		time = 0;
+	}
+
+	if ( close_all_window_status == true ) {
+		$('.im-window').removeClass('opacity');
+		setTimeout(function(){
+			$('.im-window').removeClass('active');
+		}, 500);
+	}
+
+	if ( curtain_status == true )
+		curtain( true );
+	else if ( curtain_status == false )
+		curtain( false );
+
+	setTimeout(function(){
+		if ( window_status == true ) {
+			$(window_name).addClass('active');
+			setTimeout(function(){
+				$(window_name).addClass('opacity');
+			}, 100);
+		} else if ( window_status == false ) {
+			$(window_name).removeClass('opacity');
+			setTimeout(function(){
+				$(window_name).removeClass('active');
+			}, 400);
+		}
+	}, time);
+}
+
 function close_all_window() {
 	$('.im-window').removeClass('active');
 }
 
-function message(window_name, message, additional_class) {
+function message(window_name, message, additional_class, curtain_status) {
+	if ( curtain_status == true ) {
+		curtain( true );
+	}
+
 	$('.im-message-window .im-window-top-border').removeClass('error');
 	$('.im-message-window .im-window-top-border').removeClass('warning');
 
@@ -310,91 +494,12 @@ function message(window_name, message, additional_class) {
 	$('.im-message-text').html(message);
 }
 
-function get_config_data() {
-	$.ajax({
-		type: 'POST',
-		url: 'ajax/ajax_actions.php',
-		data: { action: 'get_config_data'},
-		success: function(data){
-			data = JSON.parse(data);
-			if ( data.status == true ) {
-				$.each(data.options_data, function (index, value) {
-					if (value.param_name == 'send_interval') {
-						$('.im-config-window .im-input-interval').val( value.val );
-					} else if (value.param_name == 'gmail_account') {
-						$('.im-config-window .im-input-mail').val( value.val );
-					} else if (value.param_name == 'gmail_pass') {
-						$('.im-config-window .im-input-pass').val( value.val );
-					} else if (value.param_name == 'test_emails') {
-						$('.tab-name-test-emails .im-test-email').each(function(ind, el) {
-							$(el).val(value.val[ind]);
-						});
-					}
-				});
-				
-				im_window( 'im-config-window', true, true, true );
-			}
-		}
-	});
-};
-
-function clear_input( className ) {
-	$('.' + className).find('.im-input').val('');
-}
-
-function curtain( status ) {
-	if ( status == true ) {
-		$('.curtain').addClass('active');
-		setTimeout(function(){
-			$('.curtain').addClass('opacity');
-		}, 100);
-	} else if ( status == false ) {
-		$('.curtain').removeClass('opacity');
-		setTimeout(function(){
-			$('.curtain').removeClass('active');
-		}, 200);
-	}
-}
-
-function im_window( window_name, window_status, curtain_status, close_all_window_status ) {
-	var time = 0;
-	window_name = '.'+window_name;
-	center( window_name );
-	
-	if ( window_status == true ) {
-		time = 300;
-	} else if (window_status == false ) {
-		time = 0;
-	}
-
-	if ( close_all_window_status == true ) {
-		$('.im-window').removeClass('opacity');
-		setTimeout(function(){
-			$('.im-window').removeClass('active');
-		}, 200);
-	}
-
-	if ( curtain_status == true )
-		curtain( true );
-	else if ( curtain_status == false )
-		curtain( false );
-
-	setTimeout(function(){
-		if ( window_status == true ) {
-			$(window_name).addClass('active');
-			setTimeout(function(){
-				$(window_name).addClass('opacity');
-			}, 100);
-		} else if ( window_status == false ) {
-			$(window_name).removeClass('opacity');
-			setTimeout(function(){
-				$(window_name).removeClass('active');
-			}, 200);
-		}
-	}, time);
-}
-
 function center (className) {
 	$(className).css("top", ( $(window).height() - $(className).height() ) / 2  + "px");
 	$(className).css("left", ( $(window).width() - $(className).width() ) / 2 + "px");
+}
+
+
+function clear_input( className ) {
+	$('.' + className).find('.im-input').val('');
 }

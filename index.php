@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<div class="curtain"></div>
+	<div class="curtain fast"></div>
 	<div style='padding-top: 20px;'>
 		<div class="im-table-container">
 			<div class="im-header">
@@ -98,6 +98,17 @@
 			<div class="tab-item tab-name-message">
 				<input type="text" class="im-input im-subject" placeholder="Subject">
 				<textarea class="im-message-textarea"></textarea>
+				<br>
+				<div class="im-hr"></div>
+				
+				<div class="im-file-container">
+					<input class="im-upload-file" type="file">
+					
+					<button class="im-button im-add-file-button yellow im-right">Add File</button>
+					<ul class="im-file-ul"></ul>
+				</div>
+				
+				
 			</div>
 
 			<div class="tab-item tab-name-test-emails">
