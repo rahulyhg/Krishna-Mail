@@ -16,57 +16,53 @@
 
 <body>
 	<div class="curtain fast"></div>
-	<div style='padding-top: 20px;'>
-		<div class="im-table-container">
-			<div class="im-header">
-				<div class="im-name">Smart emails sender</div>
-				<div class="clear"></div>
-			</div>
+	<div style="height: 10px;"></div>
+	<div class="im-table-container">
+		<div class="im-header">
+			<!-- <div class="im-name">Smart emails sender</div><div class="clear"></div> -->
+		</div>
 
-			<div class="im-control-container">
-				<div class="im-control">
-					<table class="im-button-table">
-						<tr>
-							<td align="left">
-								<div class="button-container">
-									<button class="im-button im-add-button green">Add Mail</button>
-									<button class="im-button im-delete-button">Delete Mail</button>
-								</div>
-							</td>
-							<td align="center">
-								<div class="button-container">
-									<button class="im-button im-send-button green">Send</button>
-									<button class="im-button im-reset-button red">Reset</button>
-								</div>
-							</td>
-							<td align="right">
-								<div class="button-container">
-									<button class="im-button im-send-test-button yellow">Test</button>
-									<button class="im-button im-config-button yellow">Config</button>
-								</div>
-							</td>
-						</tr>
-					</table>
-					<div class="im-control-left">
-					</div>
-					<div class="im-control-center">
-						<div style='margin: 0 auto; width: 240px;'>
-						</div>
-					</div>
-					<div class="im-control-right">
+		<div class="im-control-container">
+			<div class="im-control">
+				<table class="im-button-table">
+					<tr>
+						<td align="left">
+							<div class="button-container">
+								<button class="im-button im-add-button green">Add Mail</button>
+								<button class="im-button im-delete-button">Delete Mail</button>
+							</div>
+						</td>
+						<td align="center">
+							<div class="button-container">
+								<button class="im-button im-send-test-button yellow">Test</button>
+								<button class="im-button im-config-button yellow">Config</button>
+							</div>
+						</td>
+						<td align="right">
+							<div class="button-container">
+								<button class="im-button im-send-button green">Send</button>
+								<button class="im-button im-reset-button red">Reset</button>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<div class="im-control-left">
+				</div>
+				<div class="im-control-center">
+					<div style='margin: 0 auto; width: 240px;'>
 					</div>
 				</div>
+				<div class="im-control-right">
+				</div>
 			</div>
-			<div class="im-email-tc">
-				<table class="im-email-table"></table>
-			</div>
-
-			<div class='im-footer'>Mail Sender Copyright (c) 2017</div>
 		</div>
-		
+		<div class="im-email-tc">
+			<table class="im-email-table"></table>
+		</div>
+
+		<div class='im-footer'>Mail Sender Copyright (c) 2017</div>
 	</div>
 
-	
 	<div class='im-window im-config-window'>
 		<div class="im-window-top-border"></div>
 		<div class="im-window-title">Configuration</div>
@@ -96,7 +92,20 @@
 			</div>
 
 			<div class="tab-item tab-name-message">
-				<input type="text" class="im-input im-subject" placeholder="Subject">
+				<table class="im-message-control-table">
+					<tr>
+						<td align="left"><input type="text" class="im-input im-subject" placeholder="Subject"></td>
+						<td align="right">
+							<div class="im-arrow-down"><div class="im-arrow-icon"></div></div>
+							<div class="im-subject-select"><div class="im-text">Test Message</div></div>
+							<div class="im-subject-list">
+								<ul class="im-subject-list-ul">
+								</ul>
+							</div>
+						</td>
+					</tr>
+				</table>
+
 				<textarea class="im-message-textarea"></textarea>
 				<br>
 				<div class="im-hr"></div>
@@ -170,8 +179,6 @@
 		<div class="im-control">
 			<button class="im-button im-close-button yellow">Close</button>
 		</div>
-
 	</div>
 </body>
-
 </html>

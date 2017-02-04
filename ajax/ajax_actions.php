@@ -85,13 +85,42 @@ if ( $action == 'get_last_send_id') {
 }
 
 if ( $action == 'message_save') {
-	$subject = $_POST['subject'];
-	$message = $_POST['message'];
+	$id 		= $_POST['id'];
+	$subject 	= $_POST['subject'];
+	$message 	= $_POST['message'];
+	$files 		= serialize(json_decode(stripslashes( $_POST['files'] )));
 
-	$sql = "UPDATE mail.messages SET subject='".$subject."', message='".$message."' WHERE id=1";
+	$sql = "SELECT * FROM mail.messages WHERE id=".$id;
 	$result = mysqli_query($connection, $sql);
 
-	echo json_encode(['status' => $result]);
+	if (mysqli_num_rows($result) > 0) {
+		while($row = mysqli_fetch_assoc($result)) {
+			$message_data = $row;
+		}
+	}
+
+	if ($message_data['subject'] != $subject ) {
+		$sql = "INSERT INTO mail.messages (`subject`, `message`, `files`) VALUES ('".$subject."', '".$message."', '".$files."')";
+		
+		$result = mysqli_query($connection, $sql);
+	} else {
+		$sql = "UPDATE mail.messages SET subject='".$subject."', message='".$message."' WHERE id=1";
+		$result = mysqli_query($connection, $sql);
+	}
+
+	if ( $result == true) {
+		$sql = "SELECT id, subject FROM mail.messages";
+		$subjects_list = mysqli_query($connection, $sql);
+
+		if (mysqli_num_rows($subjects_list) > 0) {
+			while($row = mysqli_fetch_assoc($subjects_list)) {
+				$subjects_data[] = $row;
+			}
+		}
+
+		echo json_encode(['status' => $result, 'subject_list' => $subjects_data]);
+	}
+		
 }
 
 if ( $action == 'new_contact_save') {
@@ -143,28 +172,45 @@ if ( $action == 'get_config_data' ) {
 		}
 	}
 
-	if ($options_data[2][val] != '') {
-		$options_data[2][val] = base64_decode($options_data[2][val]);
+	if ($options_data[2]['val'] != '') {
+		$options_data[2]['val'] = base64_decode($options_data[2]['val']);
 	}
 
-	if ($options_data[3][val] != '') {
-		$options_data[3][val] = unserialize($options_data[3][val]);
+	if ($options_data[3]['val'] != '') {
+		$options_data[3]['val'] = unserialize($options_data[3]['val']);
+	}
+
+	$sql = "SELECT * FROM mail.messages WHERE id=1";
+	$message = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($message) > 0) {
+		while($row = mysqli_fetch_assoc($message)) {
+			if ($row['files'] != "")
+				$row['files'] = unserialize($row['files']);
+			
+			$message_data = $row;
+		}
 	}
 
 	$sql = "SELECT * FROM mail.messages";
-	$result = mysqli_query($connection, $sql);
+	$messages = mysqli_query($connection, $sql);
 
-	if (mysqli_num_rows($result) > 0) {
-		while($row = mysqli_fetch_assoc($result)) {
+	if (mysqli_num_rows($messages) > 0) {
+		while($row = mysqli_fetch_assoc($messages)) {
 			if ($row['files'] != "")
 				$row['files'] = unserialize($row['files']);
 			
 			$messages_data[] = $row;
 		}
+	}
 
+	if ( !empty($messages_data) ) {
+		foreach ($messages_data as $data) {
+			$messages_subject[$data['id']] = $data['subject'];
+		}
 	}
 	
-	echo json_encode(['options_data' => $options_data, 'messages_data' => $messages_data, 'status' => true]);
+	echo json_encode(['options_data' => $options_data, 'message_data' => $message_data, 'messages_subject' => $messages_subject, 'status' => true]);
 }
 
 
@@ -307,7 +353,7 @@ if ( $action == 'add_file_to_message' ) {
 			echo json_encode(['status' => false]);
 		}
 	}
-};
+}
 
 if ( $action == 'get_message_files' ) {
 	$message_id = $_POST['message_id'];
@@ -330,6 +376,23 @@ if ( $action == 'get_message_files' ) {
 	} else {
 		echo json_encode(['status' => false]);
 	}
+}
+
+if ( $action == 'get_message_by_id' ) {
+	$message_id = $_POST['id'];
+
+	$sql = "SELECT * FROM mail.messages WHERE id=".$message_id;
+	$message = mysqli_query($connection, $sql);
+
+	if (mysqli_num_rows($message) > 0) {
+		while($row = mysqli_fetch_assoc($message)) {
+			if ($row['files'] != "")
+				$row['files'] = unserialize($row['files']);
+			
+			$message_data = $row;
+		}
+	}
+	echo json_encode(['status' => true, 'message_data' => $message_data]);
 }
 
 if ( $action == 'delete_file_from_message' ) {

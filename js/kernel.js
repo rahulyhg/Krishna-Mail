@@ -5,6 +5,7 @@ var del_button_status = false;
 var del_email_ids = [];
 var global_window_name = '';
 var message_id = 1;
+var message_files = [];
 
 $( document ).ready(function() {
 	tinymce.init({
@@ -60,9 +61,9 @@ $( document ).ready(function() {
 				type: 'POST',
 				url: 'ajax/ajax_actions.php',
 				data: { action: 'emails_delete', email_ids: email_ids},
-				success: function(data){
-					data = JSON.parse(data);
-					if ( data.status == true ) {
+				success: function(response){
+					response = JSON.parse(response);
+					if ( response.status == true ) {
 						message(null, "Emails deleted successfully", '');
 						get_table_data();
 						$('.im-delete-button').removeClass('red');
@@ -71,7 +72,6 @@ $( document ).ready(function() {
 			});
 		} else {
 			message(null, 'Not be allocated us one element', 'error');
-
 		}
 	});
 
@@ -106,9 +106,9 @@ $( document ).ready(function() {
 			type: 'POST',
 			url: 'ajax/ajax_actions.php',
 			data: { action: 'reset' },
-			success: function(data){
-				data = JSON.parse(data);
-				if ( data.status == true ) {
+			success: function(response){
+				response = JSON.parse(response);
+				if ( response.status == true ) {
 					$('.im-send-button').addClass('active');
 					$('.im-send-button').removeClass('disable');
 					$('.im-send-button').removeClass('stop');
@@ -140,9 +140,9 @@ $( document ).ready(function() {
 				type: 'POST',
 				url: 'ajax/ajax_actions.php',
 				data: { action: 'account_save', interval: interval, gmail_account: gmail_account, gmail_pass:gmail_pass },
-				success: function(data){
-					data = JSON.parse(data);
-					if ( data.status == true ) {
+				success: function(response){
+					response = JSON.parse(response);
+					if ( response.status == true ) {
 						message('im-config-window', 'Account config saved successfully', '');
 					}
 				}
@@ -154,11 +154,16 @@ $( document ).ready(function() {
 			$.ajax({
 				type: 'POST',
 				url: 'ajax/ajax_actions.php',
-				data: { action: 'message_save', subject: subject, message: content },
-				success: function(data){
-					data = JSON.parse(data);
-					if ( data.status == true ) {
+				data: { action: 'message_save', id: message_id, subject: subject, message: content, files: JSON.stringify(message_files) },
+				success: function(response){
+					response = JSON.parse(response);
+					if ( response.status == true ) {
 						message('im-config-window', 'Email message saved successfully', '');
+
+						$('.im-subject-list-ul').html('');
+						$.each(response.subject_list, function (index, value) {
+							$('.im-subject-list-ul').append("<li message-id='"+value.id+"'>"+value.subject+"</li>");
+						});
 					}
 				}
 			});
@@ -178,9 +183,9 @@ $( document ).ready(function() {
 				type: 'POST',
 				url: 'ajax/ajax_actions.php',
 				data: { action: 'test_emails_save', test_emails: test_emails},
-				success: function(data){
-					data = JSON.parse(data);
-					if ( data.status == true ) {
+				success: function(response){
+					response = JSON.parse(response);
+					if ( response.status == true ) {
 						message('im-config-window', "Test Emails saved successfully", '');
 					}
 				}
@@ -197,13 +202,13 @@ $( document ).ready(function() {
 			type: 'POST',
 			url: 'ajax/ajax_actions.php',
 			data: { action: 'new_contact_save', contact_name: contact_name, contact_phone: contact_phone, contact_email: contact_email},
-			success: function(data){
-				data = JSON.parse(data);
-				if ( data.status == true ) {
+			success: function(response){
+				response = JSON.parse(response);
+				if ( response.status == true ) {
 					message('im-add-mail-window', 'New contact successfully added', '');
 					get_table_data();
 				} else {
-					message('im-add-mail-window', data.error, 'error');
+					message('im-add-mail-window', response.error, 'error');
 				}
 			}
 		});
@@ -258,6 +263,38 @@ $( document ).ready(function() {
 		});
 	});
 
+	$('.im-message-control-table .im-arrow-down').click(function() {
+		if ( $('.im-subject-list').hasClass('active') ) {
+			$('.im-subject-list').removeClass('active');
+		} else {
+			$('.im-subject-list').addClass('active');
+		}
+	});
+
+	$(document).on('click', ".im-subject-list-ul li", function() {
+		message_id = $(this).attr('message-id');
+		$('.im-subject-select .im-text').html($(this).html());
+		
+		$.ajax({
+			type: 'POST',
+			url: 'ajax/ajax_actions.php',
+			data: { action: 'get_message_by_id', id: message_id},
+			success: function(response){
+				response = JSON.parse(response);
+				if (response.status == true) {
+					$('.im-config-window .im-subject').val(response.message_data.subject);
+					tinyMCE.activeEditor.setContent(response.message_data.message, {format : 'raw'});
+					
+					build_messgae_file_list(response.message_data.files);
+
+
+					$(".im-subject-list").removeClass('active');
+				};
+			}
+		});
+
+	});
+
 	$(document).on('click', ".im-file-delete", function () {
 		var ifd = $(this);
 		var file_name = $(ifd).closest('.im-file-item').find('.op-file-name').html();
@@ -266,9 +303,9 @@ $( document ).ready(function() {
 				type: 'POST',
 				url: 'ajax/ajax_actions.php',
 				data: { action: 'delete_file_from_message', message_id: message_id, file_name: file_name},
-				success: function(data){
-					data = JSON.parse(data);
-					if ( data.status == true ) {
+				success: function(response){
+					response = JSON.parse(response);
+					if ( response.status == true ) {
 						$(ifd).closest('.im-file-item').remove();
 					}
 				}
@@ -298,13 +335,13 @@ $( document ).ready(function() {
 				type: 'POST',
 				url: 'ajax/ajax_actions.php',
 				data: { action: 'send', gmail:mail, pass:pass },
-				success: function(data){
-					data = JSON.parse(data);
+				success: function(response){
+					response = JSON.parse(response);
 					
 					$('.im-mail-item-'+last_id).find('.im-status').removeClass('animate-flicker sending');
 					$('.im-mail-item-'+last_id).find('.im-status').addClass('active');
-					$('.im-mail-item-'+data['id']).find('.im-status').addClass('animate-flicker sending');
-					last_id = data['id'];
+					$('.im-mail-item-'+response['id']).find('.im-status').addClass('animate-flicker sending');
+					last_id = response['id'];
 
 					if (last_id == -1) {
 						sending = false;
@@ -325,9 +362,9 @@ function get_last_id ( flag ) {
 		type: 'POST',
 		url: 'ajax/ajax_actions.php',
 		data: { action: 'get_last_send_id'},
-		success: function(data){
-			data = JSON.parse(data);
-			last_id = data.id;
+		success: function(response){
+			response = JSON.parse(response);
+			last_id = response.id;
 			if (flag == true) {
 				if ( last_id == -1 ) {
 					sending = false;
@@ -344,9 +381,9 @@ function get_table_data () {
 		type: 'POST',
 		url: 'ajax/ajax_actions.php',
 		data: { action: 'get_table_data'},
-		success: function(data){
-			data = JSON.parse(data);
-			$('.im-email-table').html(data.html);
+		success: function(response){
+			response = JSON.parse(response);
+			$('.im-email-table').html(response.html);
 		}
 	});
 }
@@ -357,10 +394,10 @@ function get_config_data() {
 		type: 'POST',
 		url: 'ajax/ajax_actions.php',
 		data: { action: 'get_config_data'},
-		success: function(data){
-			data = JSON.parse(data);
-			if ( data.status == true ) {
-				$.each(data.options_data, function (index, value) {
+		success: function(response){
+			response = JSON.parse(response);
+			if ( response.status == true ) {
+				$.each(response.options_data, function (index, value) {
 					if (value.param_name == 'send_interval') {
 						$('.im-config-window .im-input-interval').val( value.val );
 					} else if (value.param_name == 'gmail_account') {
@@ -376,13 +413,17 @@ function get_config_data() {
 					}
 				});
 
-				$('.im-config-window .im-subject').val(data.messages_data[0].subject);
-				tinyMCE.activeEditor.setContent(data.messages_data[0].message, {format : 'raw'});
+				$.each(response.messages_subject, function (index, value) {
+					$('.im-subject-list-ul').append("<li message-id='"+index+"'>"+value+"</li>");
+				});
+
+				$('.im-config-window .im-subject').val(response.message_data.subject);
+				tinyMCE.activeEditor.setContent(response.message_data.message, {format : 'raw'});
 				
-				build_messgae_file_list(data.messages_data[0].files);
+				message_files = response.message_data.files;
+				build_messgae_file_list(message_files);
 				
 				im_window( 'im-config-window', true, true, true );
-
 			}
 		}
 	});
@@ -396,7 +437,22 @@ function get_message_files() {
 		success: function(response){
 			response = JSON.parse(response);
 			if ( response.status == true ) {
-				build_messgae_file_list(response.files);
+				message_files = response.files;
+				build_messgae_file_list(message_files);
+			}
+		}
+	});
+};
+
+function update_message_subject_list() {
+	$.ajax({
+		type: 'POST',
+		url: 'ajax/ajax_actions.php',
+		data: { action: 'update_message_subject_list', message_id: message_id},
+		success: function(response){
+			response = JSON.parse(response);
+			if ( response.status == true ) {
+
 			}
 		}
 	});
